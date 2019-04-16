@@ -52,9 +52,10 @@ body.show-floater .overlay {
 .floater-bottom   {
     padding: 6px 10px 8px;
     text-align: right;
-    border-top: 1px solid #DDD;
+    border-top: 3px solid #DDD;
 }
 .floater-bottom button {
     padding: 4px 8px;
     font-size: 14px;
+    align
 }
