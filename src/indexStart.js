@@ -1,3 +1,38 @@
+class Bookmarker{
+    constructor(){
+        this.bookmarks = JSON.parse(localStorage.getItem('BOOKMARKS'));
+        if(!this.bookmarks){
+            this.bookmarks = [
+            {
+                description: "Really cool site for open source photos", 
+                image: "",
+                link: "https://www.pexels.com/", 
+                title: "https://www.pexels.com/"
+            }
+        ];
+    }
+    this.bookmarks = this.bookmarks.bind(this)
+    this.fillBookmarksList(bookmarks)
+    }
+
+generateBookmarkHtml(bookmark, index){
+return `
+        <ol class="list-group" id= "bookmark-list">
+        <li class="list-group-item"> <a href="https://www.goodreads.com">goodreads</a></li>
+        </ol> 
+    ` }
+
+fillBookmarksList(bookmarks){
+    let generateBookmarkHtml = this.bookmarks.reduce(
+        (html, bookmark, index) => html += this.generateBookmarkHtml(bookmark, index), 
+        '');
+    document.getElementById('bookbookmark-list').innerHTML = generateBookmarkHtml;
+    localStorage.setItem('BOOKMARKS', JSON.stringify(this.bookmarks));
+    }
+}
+
+let bookmarker;
+window.onload = () => {bookmarker = new Bookmarker}
 /* 
 Setup your development environment
     -   clone the repository with the starting files from github

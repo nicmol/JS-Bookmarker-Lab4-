@@ -6,30 +6,38 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <h4 style= "color:blue">Enter URLs here</h4>
-    <div class="overlay"></div>
+<body style="padding-top: 30px">
+    <div class= "container">
+        <div class="header clearfix"></div>
+        <div class= "jumbotron">
+            <h4 style= "color:blue">Bookmark your favorite pages here!</h4>
+            <div class="overlay"></div>
 
-    <div class="floater content">
-        <form class="bookmark-form">
-            <div class="floater-top">
-                <input id="url" type="text" class="form-control">
-                <input id="description" type="text" class="form-control">
-            
+            <div class="floater content">
+                <form class="bookmark-form">
+                    <div class="form-group floater-top">
+                        <label>Website URL</label>
+                        <input id="url" type="text" class="form-control">
+                    </div>
+                    <div class="form-group floater-top">
+                        <label>Website Name</label>
+                        <input id="description" type="text" class="form-control">
+                    
+                    </div>
+                    <div class="form-group floater-bottom">
+                        <button type="submit" class="btn btn-primary btn-sm">Add</button>
+                    </div>
+                </form>
             </div>
-            <div class="floater-bottom">
-                <button type="submit" class="btn btn-primary btn-sm">Add</button>
-            </div>
-        </form>
-    </div>
-
-    <div class="bookmarks-list content">
-        <ol>
-        <li><a href="https://www.w3schools.com">w3Schools</a></ul> </br>
-          <li> <a href="https://www.goodreads.com">goodreads</a></ul>
-          </ol>
-           
+        </div>
+        <div class="bookmarks-list content">
         
+            <ol class="list-group" id= "bookmark-list">
+                    <li class="list-group-item"> <a href="https://www.goodreads.com">goodreads</a></li>
+                    <li class="list-group-item"><a href="https://www.w3schools.com">w3Schools</a></li>
+                    <li class="list-group-item"><a href="https://www.catsinsinks.com">catsinsinks</a></li>
+                  </ol>     
+        </div>
     </div>
     <script src="dist/src/index.js"></script>    
 </body>

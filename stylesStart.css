@@ -2,6 +2,7 @@ body {
     padding: 30px; 
     background-image: url('images/background.jpeg');
     background-size: cover;
+    
 }
 .overlay  {
     position: fixed;
@@ -53,9 +54,14 @@ body.show-floater .overlay {
     padding: 6px 10px 8px;
     text-align: right;
     border-top: 3px solid #DDD;
+  
 }
 .floater-bottom button {
     padding: 4px 8px;
     font-size: 14px;
-    align
+    align: center;
+}
+
+.jumbotron{
+ margin-top: 40px;
 }
