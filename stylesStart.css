@@ -52,16 +52,17 @@ body.show-floater .overlay {
 }
 .floater-bottom   {
     padding: 6px 10px 8px;
-    text-align: right;
+    text-align: center;
     border-top: 3px solid #DDD;
   
 }
 .floater-bottom button {
     padding: 4px 8px;
     font-size: 14px;
-    align: center;
+    box-align: justify;
 }
 
-.jumbotron{
- margin-top: 40px;
+.list-group{
+    display: block;
 }
+
