@@ -14,40 +14,27 @@ class Bookmarker {
 
         this.fillBookmarksList = this.fillBookmarksList.bind(this)
         this.fillBookmarksList()
-
     }
 
     generateBookmarkHtml(bookmark, index) {
-   /*      return `
-        <li class="list-group-item checkbox">
-          <div class="row">
-            <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 checkbox">
-              <label><input id="toggleTaskStatus" type="checkbox" value="" class="" 
-              ${bookmark.isComplete ?"checked":""}
-              onchange ="toDo.toggleTaskStatus (${index})"> 
-              </label>
-            </div>
-            <div class="col-md-10 col-xs-10 col-lg-10 col-sm-10 task-text ${bookmark.isComplete ?"complete":""}">
-            ${bookmark.bookmark}
-            </div>
-            <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area">
-              <a class="" href="/" onclick="toDo.deleteTask(event, ${index})" ><i id="deleteTask" data-id= "${index}" class="delete-icon glyphicon glyphicon-trash"></i></a>
-            </div>
-          </div>
-        </li>
-      `;   */     
-    
         return `
         <ol class="list-group" id= "bookmark-list">
-        <li class="list-group-item">
-        <div img-src= "${bookmark.image}"></div>
-       ${bookmark.description}, ${bookmark.link}, ${bookmark.title}, ${index}</li>
+            <li class="list-group-item">
+                <div img-src= "${bookmark.image}"></div>
+                ${bookmark.description}, ${bookmark.link}, ${bookmark.title}, ${index}
+                <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area">
+                <a  href="/" onclick="bookmarker.deleteBookmark(event, ${index})" id="deleteBookmark" data-id= "${index}" class="delete-icon glyphicon glyphicon-trash"></a>
+                </div>
+                <div>
+                <img src="" class="img-square" alt="web image">  
+              </div> 
+            </li>
         </ol> 
+    </div>
         `
     }
 
     fillBookmarksList() {
-        
         let bookmarksHtml = this.bookmarks.reduce(
             (html, bookmark, index) => html += this.generateBookmarkHtml(bookmark, index),
             '');
@@ -57,7 +44,7 @@ class Bookmarker {
     }
 
     deleteBookmark(event, index){
-        event.preventDefault();
+         event.preventDefault();
         this.bookmarks.splice(index, 1);
         this.fillBookmarksList();
     }
