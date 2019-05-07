@@ -1,9 +1,12 @@
 class Bookmarker {
-    constructor() {
-        this.bookmarks = JSON.parse(localStorage.getItem('BOOKMARKS'));
-        if (!this.bookmarks) {
+    constructor() {        
+           // The instance variables for the url and my api key
+            this.apiUrl = 'https://opengraph.io/api/1.1/site';
+            this.appId  = '3e96111e-caf8-4804-a802-2b3fe4b9a74c'; 
+            this.bookmarks = JSON.parse(localStorage.getItem('BOOKMARKS'));
+            if (!this.bookmarks) {
             this.bookmarks = [
-                {
+               {
                     description: "Really cool site for open source photos",
                     image: "",
                     link: "https://www.pexels.com/",
@@ -23,7 +26,8 @@ class Bookmarker {
                 <div img-src= "${bookmark.image}"></div>
                 ${bookmark.description}, ${bookmark.link}, ${bookmark.title}, ${index}
                 <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area">
-                <a  href="/" onclick="bookmarker.deleteBookmark(event, ${index})" id="deleteBookmark" data-id= "${index}" class="delete-icon glyphicon glyphicon-trash"></a>
+                <a  href="/" onclick="bookmarker.deleteBookmark(event, ${index})" id="deleteBookmark" 
+                data-id= "${index}" class="delete-icon glyphicon glyphicon-trash"></a>
                 </div>
                 <div>
                 <img src="" class="img-square" alt="web image">  
@@ -44,7 +48,7 @@ class Bookmarker {
     }
 
     deleteBookmark(event, index){
-         event.preventDefault();
+        event.preventDefault();
         this.bookmarks.splice(index, 1);
         this.fillBookmarksList();
     }
@@ -55,29 +59,52 @@ class Bookmarker {
         this.addBookmark(url.value, description.value);
         url.value = ""
         description.value = ""
-    }
 
+  
+    }
+    // used url and description for parameters instead of 'event'
     addBookmark(url, description) {
-        let newBookmark = {
+   /*  let newBookmark = {
             description: description,
             image: "",
             link: url,
             title: url
-        };
+        }; */ 
         let parentDiv =document.getElementById('description').parentElement;
         if(description == ''){
             parentDiv.classList.add('has-error');
-            
+                  //The call to fetch
+                  const url = encodeURIComponent(this.bookmarkUrl.value);
+                  const urlForHref = this.bookmarkUrl.value;
+                  const description = this.bookmarkDesc.value;
+                  fetch(`${this.apiUrl}/${url}?app_id=${this.appId}`)
+                      .then(response => response.json())
+                      .then(data => { 
+                            const bookmark = {
+                                title: data.hybridGraph.title,
+                                image: data.hybridGraph.image,
+                                link: urlForHref,
+                                description: description
+                            };
+                      this.bookmarks.push(bookmark);
+                      this.fillBookmarksList(this.bookmarks);
+                      this.storeBookmarks(this.bookmarks);
+                      this.bookmarkForm.reset();
+              })
+              .catch(error => {
+                  alert('There was a problem getting info!'); 
+              });
         }
-        else{
-            parentDiv.classList.remove('has-error');
-            this.bookmarks.push(newBookmark);
-            this.fillBookmarksList();
-
+      
+            else{
+                parentDiv.classList.remove('has-error');
+                this.bookmarks.push(newBookmark);
+            }   this.fillBookmarksList();
+    
         }
     }
 
-}
+
 
 let bookmarker;
 window.onload = () => { bookmarker = new Bookmarker(); }
