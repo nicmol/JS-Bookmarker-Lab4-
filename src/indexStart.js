@@ -63,46 +63,47 @@ class Bookmarker {
   
     }
     // used url and description for parameters instead of 'event'
-    addBookmark(url, description) {
-   /*  let newBookmark = {
-            description: description,
-            image: "",
-            link: url,
-            title: url
-        }; */ 
-        let parentDiv =document.getElementById('description').parentElement;
-        if(description == ''){
+    addBookmark(urlParam, description) {
+        /*  let newBookmark = {
+                 description: description,
+                 image: "",
+                 link: url,
+                 title: url
+             }; */
+        let parentDiv = document.getElementById('description').parentElement;
+        if (description == '') {
             parentDiv.classList.add('has-error');
-                  //The call to fetch
-                  const url = encodeURIComponent(this.bookmarkUrl.value);
-                  const urlForHref = this.bookmarkUrl.value;
-                  const description = this.bookmarkDesc.value;
-                  fetch(`${this.apiUrl}/${url}?app_id=${this.appId}`)
-                      .then(response => response.json())
-                      .then(data => { 
-                            const bookmark = {
-                                title: data.hybridGraph.title,
-                                image: data.hybridGraph.image,
-                                link: urlForHref,
-                                description: description
-                            };
-                      this.bookmarks.push(bookmark);
-                      this.fillBookmarksList(this.bookmarks);
-                      this.storeBookmarks(this.bookmarks);
-                      this.bookmarkForm.reset();
-              })
-              .catch(error => {
-                  alert('There was a problem getting info!'); 
-              });
+
         }
-      
-            else{
-                parentDiv.classList.remove('has-error');
-                this.bookmarks.push(newBookmark);
-            }   this.fillBookmarksList();
-    
+
+        else {
+            //The call to fetch
+            const urlForHref = urlParam;
+            const url = encodeURIComponent(urlForHref);
+            //const description = this.bookmarkDesc.value;
+            fetch(`${this.apiUrl}/${url}?app_id=${this.appId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const bookmark = {
+                        title: data.hybridGraph.title,
+                        image: data.hybridGraph.image,
+                        link: urlForHref,
+                        description: description
+                    };
+                    this.bookmarks.push(bookmark);
+                    this.fillBookmarksList();
+                    // this.storeBookmarks(this.bookmarks);
+                    // this.bookmarkForm.reset();
+                })
+                .catch(error => {
+                    alert('There was a problem getting info! ' + error);
+                });
+            parentDiv.classList.remove('has-error');
+       
         }
+
     }
+}
 
 
 
