@@ -23,14 +23,14 @@ class Bookmarker {
         return `
         <ol class="list-group" id= "bookmark-list">
             <li class="list-group-item">
-                <div img-src= "${bookmark.image}"></div>
-                ${bookmark.description}, ${bookmark.link}, ${bookmark.title}, ${index}
+                ${index}<br>
+                ${bookmark.description}<br> ${bookmark.link}<br>${bookmark.title}<br>
                 <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area">
                 <a  href="/" onclick="bookmarker.deleteBookmark(event, ${index})" id="deleteBookmark" 
                 data-id= "${index}" class="delete-icon glyphicon glyphicon-trash"></a>
                 </div>
                 <div>
-                <img src="" class="img-square" alt="web image">  
+                <img src="${bookmark.image}" class="img-square" alt="web image">  
               </div> 
             </li>
         </ol> 
@@ -53,7 +53,8 @@ class Bookmarker {
         this.fillBookmarksList();
     }
 
-    addBookmarkClick(){
+    addBookmarkClick(event){
+        event.preventDefault();
         let url = document.getElementById('url');
         let description = document.getElementById('description');
         this.addBookmark(url.value, description.value);
